@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  configs1:
+    container_name: configs1
+    image: mongo
+    restart: unless-stopped
+    command: mongod --auth --configsvr --replSet cfgrs --port 27017 --dbpath /data/db
+    ports:
+      - 27018:27017
+    volumes:
+      - mongo_configs1:/data/db
+      
+  configs2:
+    container_name: configs1
+    image: mongo
+    restart: unless-stopped
+    command: mongod --auth --configsvr --replSet cfgrs --port 27017 --dbpath /data/db
+    ports:
+      - 27019:27017
+    volumes:
+      - mongo_configs2:/data/db
+
+volumes:
+  mongo_configs1: {}
+  mongo_configs2: {}

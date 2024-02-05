@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mongo_shard:
+    container_name: mongo_shard
+    image: mongo
+    restart: unless-stopped
+    command: mongod --shardsvr --port 27017 --dbpath /data/db
+    ports:
+      - 27019:27017
+    volumes:
+      - mongo_shard:/data/db
+
+volumes:
+  mongo_shard: {}
